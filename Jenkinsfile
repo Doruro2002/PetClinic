@@ -22,6 +22,12 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
+        stage('Run OWASP Dependency-Check') {
+            steps {
+                bat 'mvn org.owasp:dependency-check-maven:check'
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
