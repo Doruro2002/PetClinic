@@ -22,9 +22,9 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
-        stage('Run OWASP Dependency-Check') {
+        stage('OWASP Dependency Check') {
             steps {
-                bat 'mvn org.owasp:dependency-check-maven:check'
+                dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
             }
         }
 
