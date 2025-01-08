@@ -20,25 +20,20 @@ pipeline {
         }
         stage('Compile') {
             steps {
-                echo '##########################\nGetting code from GitHub\n#########################'
+                echo '##########################\nCompilation de code\n#########################'
                 bat 'mvn compile'
             }
         }
         stage('Unit Test') {
             steps {
-                echo '##########################\nGetting code from GitHub\n#########################'
+                echo '##########################\nUnit Test Check\n#########################'
                 bat 'mvn test -DskipTests=true'
             }
         }
-        stage('Build') {
-            steps {
-                echo '##########################\nGetting code from GitHub\n#########################'
-                bat 'mvn clean install'
-            }
-        }
+        
         stage('OWASP Dependency Check') {
             steps {
-                echo '##########################\nGetting code from GitHub\n#########################'
+                echo '##########################\nOWASP D-Check Stage\n#########################'
                 dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
@@ -46,7 +41,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                echo '##########################\nGetting code from GitHub\n#########################'
+                echo '##########################\nSonarQube Analysis Stage\n#########################'
                 withSonarQubeEnv('sonar-server') {
                     bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
                     -Dsonar.projectKey=Ems-CRUD ^
@@ -55,6 +50,12 @@ pipeline {
                     -Dsonar.host.url=${SONAR_HOST_URL} ^
                     -Dsonar.login=${SONAR_AUTH_TOKEN}"""
                 }
+            }
+        }
+        stage('Build') {
+            steps {
+                echo '##########################\nBuild Stage \n#########################'
+                bat 'mvn clean install'
             }
         }
     }
