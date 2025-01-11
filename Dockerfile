@@ -4,6 +4,11 @@ FROM openjdk:17-jdk-slim
 # Set the working directory in the container
 WORKDIR /app
 
+# Install Maven and any required dependencies
+RUN apt-get update && apt-get install -y \
+    maven \
+    && rm -rf /var/lib/apt/lists/*
+    
 # Copy the Maven project files to the container
 COPY pom.xml ./
 COPY src ./src
