@@ -51,12 +51,12 @@ pipeline {
         //         }
         //     }
         // }
-        // stage('Build') {
-        //     steps {
-        //         echo '##########################\nBuild Stage \n#########################'
-        //         bat 'mvn clean install'
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                echo '##########################\nBuild Stage \n#########################'
+                bat 'mvn clean install'
+            }
+        }
         stage('Build and Tag Docker Image') {
             steps {
                 echo '##########################\nBuild and Tag Docker Image Stage\n#########################'
