@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests=true
 
 # Copy the resulting JAR file to the app directory
-COPY target/myapp.jar ./myapp.jar
+COPY target/spring-petclinic-3.4.0-SNAPSHOT.jar ./spring-petclinic-3.4.0-SNAPSHOT.jar
 
 # Command to run the application
-CMD ["java", "-jar", "myapp.jar"]
+CMD ["java", "-jar", "spring-petclinic-3.4.0-SNAPSHOT.jar"]
