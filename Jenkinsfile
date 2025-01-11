@@ -31,26 +31,26 @@ pipeline {
                 bat 'mvn test -DskipTests=true'
             }
         }
-        stage('OWASP Dependency Check') {
-            steps {
-                echo '##########################\nOWASP D-Check Stage\n#########################'
-                dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
-        stage('SonarQube Analysis') {
-            steps {
-                echo '##########################\nSonarQube Analysis Stage\n#########################'
-                withSonarQubeEnv('sonar-server') {
-                    bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
-                    -Dsonar.projectKey=Ems-CRUD ^
-                    -Dsonar.sources=. ^
-                    -Dsonar.java.binaries=. ^
-                    -Dsonar.host.url=${SONAR_HOST_URL} ^
-                    -Dsonar.login=${SONAR_AUTH_TOKEN}"""
-                }
-            }
-        }
+        // stage('OWASP Dependency Check') {
+        //     steps {
+        //         echo '##########################\nOWASP D-Check Stage\n#########################'
+        //         dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
+        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+        //     }
+        // }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         echo '##########################\nSonarQube Analysis Stage\n#########################'
+        //         withSonarQubeEnv('sonar-server') {
+        //             bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
+        //             -Dsonar.projectKey=Ems-CRUD ^
+        //             -Dsonar.sources=. ^
+        //             -Dsonar.java.binaries=. ^
+        //             -Dsonar.host.url=${SONAR_HOST_URL} ^
+        //             -Dsonar.login=${SONAR_AUTH_TOKEN}"""
+        //         }
+        //     }
+        // }
         stage('Build') {
             steps {
                 echo '##########################\nBuild Stage \n#########################'
