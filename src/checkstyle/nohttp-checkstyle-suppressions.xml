@@ -7,6 +7,5 @@
 	<suppress files="node[\\/].*" checks=".*"/>
 	<suppress files="build[\\/].*" checks=".*"/>
 	<suppress files="target[\\/].*" checks=".*"/>
-<!-- 	<suppress files=".+\.(jar|git|ico|p12|gif|jks|jpg|svg|log)" checks="NoHttp"/> -->
-	<suppress files=".+\.(jar|git|ico|p12|gif|jks|jpg|svg|log|dependency-check-report\.xml)" checks="NoHttp"/>
+	<suppress files=".+\.(jar|git|ico|p12|gif|jks|jpg|svg|log)" checks="NoHttp"/>
 </suppressions>
