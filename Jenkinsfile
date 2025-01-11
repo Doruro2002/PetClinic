@@ -10,7 +10,7 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
         SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_AUTH_TOKEN = credentials('token-sonar')
-        DOCKER_CREDENTIAL_ID = 'docker-token'
+        DOCKER_CREDENTIAL_ID = credentials('docker-token')
     }
     stages {
         stage('Checkout Code') {
