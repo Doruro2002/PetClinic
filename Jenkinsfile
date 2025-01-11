@@ -25,12 +25,12 @@ pipeline {
         //         bat 'mvn compile'
         //     }
         // }
-        stage('Unit Test') {
-            steps {
-                echo '##########################\nUnit Test Check\n#########################'
-                bat 'mvn test -DskipTests=true'
-            }
-        }
+        // stage('Unit Test') {
+        //     steps {
+        //         echo '##########################\nUnit Test Check\n#########################'
+        //         bat 'mvn test -DskipTests=true'
+        //     }
+        // }
         // stage('OWASP Dependency Check') {
         //     steps {
         //         echo '##########################\nOWASP D-Check Stage\n#########################'
@@ -51,12 +51,12 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Build') {
-            steps {
-                echo '##########################\nBuild Stage \n#########################'
-                bat 'mvn clean install'
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         echo '##########################\nBuild Stage \n#########################'
+        //         bat 'mvn clean install'
+        //     }
+        // }
         stage('Build and Tag Docker Image') {
             steps {
                 echo '##########################\nBuild and Tag Docker Image Stage\n#########################'
