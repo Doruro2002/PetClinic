@@ -19,12 +19,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Doruro2002/PetClinic.git'
             }
         }
-        stage('Compile') {
-            steps {
-                echo '##########################\nCompilation de code\n#########################'
-                bat 'mvn compile'
-            }
-        }
+        // stage('Compile') {
+        //     steps {
+        //         echo '##########################\nCompilation de code\n#########################'
+        //         bat 'mvn compile'
+        //     }
+        // }
         stage('Unit Test') {
             steps {
                 echo '##########################\nUnit Test Check\n#########################'
