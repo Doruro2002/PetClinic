@@ -22,7 +22,7 @@ pipeline {
         stage('Compile') {
             steps {
                 echo '##########################\nCompilation de code\n#########################'
-                bat 'mvn compile'
+                bat 'mvn compile -DskipTests=true'
             }
         }
         stage('Unit Test') {
