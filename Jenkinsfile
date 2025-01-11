@@ -10,6 +10,7 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
         SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_AUTH_TOKEN = credentials('token-sonar')
+        DOCKER_CREDENTIAL_ID = 'docker-token'
     }
     stages {
         stage('Checkout Code') {
@@ -30,7 +31,6 @@ pipeline {
                 bat 'mvn test -DskipTests=true'
             }
         }
-        
         stage('OWASP Dependency Check') {
             steps {
                 echo '##########################\nOWASP D-Check Stage\n#########################'
@@ -38,7 +38,6 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
-
         stage('SonarQube Analysis') {
             steps {
                 echo '##########################\nSonarQube Analysis Stage\n#########################'
@@ -56,6 +55,16 @@ pipeline {
             steps {
                 echo '##########################\nBuild Stage \n#########################'
                 bat 'mvn clean install'
+            }
+        }
+        stage('Build and Tag Docker Image') {
+            steps {
+                echo '##########################\nBuild and Tag Docker Image Stage\n#########################'
+                script {
+                    docker.withRegistry('', DOCKER_CREDENTIAL_ID) {
+                        bat "docker build -t PetClinic-Image:tag -f docker/Dockerfile ."
+                    }
+                }
             }
         }
     }
