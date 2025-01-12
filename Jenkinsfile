@@ -70,7 +70,7 @@ pipeline {
         stage('Trivy Image Scan') {
             steps {
                 echo '##########################\nTrivy Image Scan Stage\n#########################'
-                sh "trivy image petclinic-image:tag > trivy-report.txt"
+                bat "trivy image petclinic-image:tag > trivy-report.txt"
                 echo 'Trivy scan completed. Report saved as trivy-report.txt'
             }
         }
