@@ -61,7 +61,7 @@ pipeline {
                 echo '##########################\nBuild and Tag Docker Image Stage\n#########################'
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', DOCKER_CREDENTIAL_ID) {
-                        bat "docker build -t saifhamdi/petclinic-image:latest -f Dockerfile ."
+                        bat "docker build -t saifhamdi/petclinic-image:new_version -f Dockerfile ."
                     }
                 }
             }
@@ -69,7 +69,7 @@ pipeline {
         stage('Trivy Image Scan') {
             steps {
                 echo '##########################\nTrivy Image Scan Stage\n#########################'
-                bat "trivy image petclinic-image:tag > trivy-report.txt"
+                bat "trivy image saifhamdi/petclinic-image:new_version > trivy-report.txt"
                 echo 'Trivy scan completed. Report saved as trivy-report.txt'
             }
         }
@@ -78,7 +78,7 @@ pipeline {
                 echo '##########################\nPush Docker Image Stage\n#########################'
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', DOCKER_CREDENTIAL_ID) {
-                        bat "docker push saifhamdi/petclinic-image:latest"
+                        bat "docker push saifhamdi/petclinic-image:new_version"
                     }
                 }
             }
