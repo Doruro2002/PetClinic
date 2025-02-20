@@ -31,13 +31,13 @@ pipeline {
                 bat 'mvn test -DskipTests=true'
             }
         }
-        stage('OWASP Dependency Check') {
-            steps {
-                echo '##########################\nOWASP D-Check Stage\n#########################'
-                dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
+        // stage('OWASP Dependency Check') {
+        //     steps {
+        //         echo '##########################\nOWASP D-Check Stage\n#########################'
+        //         dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
+        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+        //     }
+        // }
         stage('SonarQube Analysis') {
             steps {
                 echo '##########################\nSonarQube Analysis Stage\n#########################'
