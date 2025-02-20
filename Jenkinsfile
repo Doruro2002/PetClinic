@@ -42,7 +42,7 @@ pipeline {
         stage('SonarQube Analysis') {
     steps {
         echo '##########################\nSonarQube Analysis Stage\n#########################'
-        withCredentials([string(credentialsId: 'token-sonar', variable: 'SONAR_AUTH_TOKEN')]) {
+        withCredentials([string(credentialsId: 'token-sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
             withSonarQubeEnv('sonar-server') {
                 bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
                 -Dsonar.projectKey=spring-petclinic ^
