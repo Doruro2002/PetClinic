@@ -42,7 +42,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 echo '##########################\nSonarQube Analysis Stage\n#########################'
-                echo "Sonar Auth Token: ${SONAR_AUTH_TOKEN}"
+                
                 withSonarQubeEnv('sonar-server') {
                     bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
                         -Dsonar.projectKey=Ems-CRUD ^
