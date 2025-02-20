@@ -18,25 +18,25 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Doruro2002/PetClinic.git'
             }
         }
-        // stage('Compile') {
-        //     steps {
-        //         echo '##########################\nCompilation de code\n#########################'
-        //         bat 'mvn compile'
-        //     }
-        // }
-        // stage('Unit Test') {
-        //     steps {
-        //         echo '##########################\nUnit Test Check\n#########################'
-        //         bat 'mvn test -DskipTests=true'
-        //     }
-        // }
-        // stage('OWASP Dependency Check') {
-        //     steps {
-        //         echo '##########################\nOWASP D-Check Stage\n#########################'
-        //         dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
-        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-        //     }
-        // }
+        stage('Compile') {
+            steps {
+                echo '##########################\nCompilation de code\n#########################'
+                bat 'mvn compile'
+            }
+        }
+        stage('Unit Test') {
+            steps {
+                echo '##########################\nUnit Test Check\n#########################'
+                bat 'mvn test -DskipTests=true'
+            }
+        }
+        stage('OWASP Dependency Check') {
+            steps {
+                echo '##########################\nOWASP D-Check Stage\n#########################'
+                dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
         
         stage('SonarQube Analysis') {
     steps {
