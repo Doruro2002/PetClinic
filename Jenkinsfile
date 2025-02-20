@@ -43,10 +43,10 @@ pipeline {
         echo '##########################\nSonarQube Analysis Stage\n#########################'
 
             withSonarQubeEnv('sonar-server') {
-                bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
-                -Dsonar.projectKey=spring-petclinic ^
-                -Dsonar.java.binaries=. """
-            }
+    bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
+    -Dsonar.projectKey=spring-petclinic ^
+    -Dsonar.java.binaries=. """
+}
         
     }
 }
