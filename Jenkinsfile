@@ -19,44 +19,44 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Doruro2002/PetClinic.git'
             }
         }
-        // stage('Compile') {
-        //     steps {
-        //         echo '##########################\nCompilation de code\n#########################'
-        //         bat 'mvn compile'
-        //     }
-        // }
-        // stage('Unit Test') {
-        //     steps {
-        //         echo '##########################\nUnit Test Check\n#########################'
-        //         bat 'mvn test -DskipTests=true'
-        //     }
-        // }
-        // stage('OWASP Dependency Check') {
-        //     steps {
-        //         echo '##########################\nOWASP D-Check Stage\n#########################'
-        //         dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
-        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-        //     }
-        // }
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         echo '##########################\nSonarQube Analysis Stage\n#########################'
-        //         withSonarQubeEnv('sonar-server') {
-        //             bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
-        //             -Dsonar.projectKey=Ems-CRUD ^
-        //             -Dsonar.sources=. ^
-        //             -Dsonar.java.binaries=. ^
-        //             -Dsonar.host.url=${SONAR_HOST_URL} ^
-        //             -Dsonar.login=${SONAR_AUTH_TOKEN}"""
-        //         }
-        //     }
-        // }
-        // stage('Build') {
-        //     steps {
-        //         echo '##########################\nBuild Stage \n#########################'
-        //         bat 'mvn clean install'
-        //     }
-        // }
+        stage('Compile') {
+            steps {
+                echo '##########################\nCompilation de code\n#########################'
+                bat 'mvn compile'
+            }
+        }
+        stage('Unit Test') {
+            steps {
+                echo '##########################\nUnit Test Check\n#########################'
+                bat 'mvn test -DskipTests=true'
+            }
+        }
+        stage('OWASP Dependency Check') {
+            steps {
+                echo '##########################\nOWASP D-Check Stage\n#########################'
+                dependencyCheck additionalArguments: '--scan target/', odcInstallation: 'Dependency Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                echo '##########################\nSonarQube Analysis Stage\n#########################'
+                withSonarQubeEnv('sonar-server') {
+                    bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
+                    -Dsonar.projectKey=Ems-CRUD ^
+                    -Dsonar.sources=. ^
+                    -Dsonar.java.binaries=. ^
+                    -Dsonar.host.url=${SONAR_HOST_URL} ^
+                    -Dsonar.login=${SONAR_AUTH_TOKEN}"""
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                echo '##########################\nBuild Stage \n#########################'
+                bat 'mvn clean install'
+            }
+        }
         stage('Build and Tag Docker Image') {
             steps {
                 echo '##########################\nBuild and Tag Docker Image Stage\n#########################'
@@ -67,13 +67,13 @@ pipeline {
                 }
             }
         }
-        // stage('Trivy Image Scan') {
-        //     steps {
-        //         echo '##########################\nTrivy Image Scan Stage\n#########################'
-        //         bat "trivy image petclinic-image:tag > trivy-report.txt"
-        //         echo 'Trivy scan completed. Report saved as trivy-report.txt'
-        //     }
-        // }
+        stage('Trivy Image Scan') {
+            steps {
+                echo '##########################\nTrivy Image Scan Stage\n#########################'
+                bat "trivy image petclinic-image:tag > trivy-report.txt"
+                echo 'Trivy scan completed. Report saved as trivy-report.txt'
+            }
+        }
         stage('Push Docker Image') {
             steps {
                 echo '##########################\nPush Docker Image Stage\n#########################'
