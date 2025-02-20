@@ -62,7 +62,7 @@ pipeline {
                 echo '##########################\nBuild and Tag Docker Image Stage\n#########################'
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', DOCKER_CREDENTIAL_ID) {
-                        bat "docker build -t petclinic-image:tag -f Dockerfile ."
+                        bat "docker build -t saifhamdi/petclinic-image:latest -f Dockerfile ."
                     }
                 }
             }
