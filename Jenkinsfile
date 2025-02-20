@@ -39,19 +39,35 @@ pipeline {
         //     }
         // }
         stage('SonarQube Analysis') {
-            steps {
-                echo '##########################\nSonarQube Analysis Stage\n#########################'
-                echo "Sonar Auth Token: ${SONAR_AUTH_TOKEN}"
-                withSonarQubeEnv('sonar-server') {
-                    bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
-                    -Dsonar.projectKey=Ems-CRUD ^
-                    -Dsonar.sources=. ^
-                    -Dsonar.java.binaries=. ^
-                    -Dsonar.host.url=${SONAR_HOST_URL} ^
-                    -Dsonar.login=${SONAR_AUTH_TOKEN}"""
-                }
+    steps {
+        echo '##########################\nSonarQube Analysis Stage\n#########################'
+        withCredentials([string(credentialsId: 'token-sonar', variable: 'SONAR_AUTH_TOKEN')]) {
+            echo "Sonar Auth Token: ${SONAR_AUTH_TOKEN}"
+            withSonarQubeEnv('sonar-server') {
+                bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
+                -Dsonar.projectKey=Ems-CRUD ^
+                -Dsonar.sources=. ^
+                -Dsonar.java.binaries=. ^
+                -Dsonar.host.url=${SONAR_HOST_URL} ^
+                -Dsonar.login=${SONAR_AUTH_TOKEN}"""
             }
         }
+    }
+}
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         echo '##########################\nSonarQube Analysis Stage\n#########################'
+        //         echo "Sonar Auth Token: ${SONAR_AUTH_TOKEN}"
+        //         withSonarQubeEnv('sonar-server') {
+        //             bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
+        //             -Dsonar.projectKey=Ems-CRUD ^
+        //             -Dsonar.sources=. ^
+        //             -Dsonar.java.binaries=. ^
+        //             -Dsonar.host.url=${SONAR_HOST_URL} ^
+        //             -Dsonar.login=${SONAR_AUTH_TOKEN}"""
+        //         }
+        //     }
+        // }
         stage('Build') {
             steps {
                 echo '##########################\nBuild Stage \n#########################'
