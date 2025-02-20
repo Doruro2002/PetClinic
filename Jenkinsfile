@@ -67,13 +67,13 @@ pipeline {
                 }
             }
         }
-        stage('Trivy Image Scan') {
-            steps {
-                echo '##########################\nTrivy Image Scan Stage\n#########################'
-                bat "trivy image petclinic-image:tag > trivy-report.txt"
-                echo 'Trivy scan completed. Report saved as trivy-report.txt'
-            }
-        }
+        // stage('Trivy Image Scan') {
+        //     steps {
+        //         echo '##########################\nTrivy Image Scan Stage\n#########################'
+        //         bat "trivy image petclinic-image:tag > trivy-report.txt"
+        //         echo 'Trivy scan completed. Report saved as trivy-report.txt'
+        //     }
+        // }
         stage('Push Docker Image') {
             steps {
                 echo '##########################\nPush Docker Image Stage\n#########################'
