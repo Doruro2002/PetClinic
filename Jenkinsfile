@@ -8,8 +8,7 @@ pipeline {
     }
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
-        SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_AUTH_TOKEN = credentials('token-sonarqube')
+        
         DOCKER_CREDENTIAL_ID = 'docker-token'
     }
     stages {
@@ -46,10 +45,7 @@ pipeline {
             withSonarQubeEnv('sonar-server') {
                 bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
                 -Dsonar.projectKey=spring-petclinic ^
-                -Dsonar.sources=. ^
-                -Dsonar.java.binaries=. ^
-                -Dsonar.host.url=${SONAR_HOST_URL} ^
-                -Dsonar.login=${SONAR_AUTH_TOKEN}"""
+                -Dsonar.java.binaries=. """
             }
         }
     }
