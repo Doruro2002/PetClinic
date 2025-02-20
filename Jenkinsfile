@@ -9,7 +9,7 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
         SONAR_HOST_URL = 'http://localhost:9000'
-        // SONAR_AUTH_TOKEN = credentials('token-sonar')
+        SONAR_AUTH_TOKEN = credentials('token-sonar')
         DOCKER_CREDENTIAL_ID = 'docker-token'
     }
     stages {
@@ -41,6 +41,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 echo '##########################\nSonarQube Analysis Stage\n#########################'
+                echo "Sonar Auth Token: ${SONAR_AUTH_TOKEN}"
                 withSonarQubeEnv('sonar-server') {
                     bat """\"${SCANNER_HOME}\\bin\\sonar-scanner.bat\" ^
                     -Dsonar.projectKey=Ems-CRUD ^
