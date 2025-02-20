@@ -25,12 +25,12 @@ pipeline {
                 bat 'mvn compile'
             }
         }
-        stage('Unit Test') {
-            steps {
-                echo '##########################\nUnit Test Check\n#########################'
-                bat 'mvn test -DskipTests=true'
-            }
-        }
+        // stage('Unit Test') {
+        //     steps {
+        //         echo '##########################\nUnit Test Check\n#########################'
+        //         bat 'mvn test -DskipTests=true'
+        //     }
+        // }
         // stage('OWASP Dependency Check') {
         //     steps {
         //         echo '##########################\nOWASP D-Check Stage\n#########################'
